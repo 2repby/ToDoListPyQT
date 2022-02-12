@@ -1,0 +1,6 @@
+sys
+os
+PySide2
+sqlite3
+PyQt5
+design

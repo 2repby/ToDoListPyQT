@@ -6,107 +6,484 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>586</width>
+    <height>592</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>ToDoList - Персональный менеджер задач</string>
+  </property>
+  <property name="accessibleName">
+   <string>Персональный трекер задач</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="enabled">
     <bool>true</bool>
    </property>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QWidget" name="categoriesWidget" native="true">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>510</y>
-      <width>101</width>
-      <height>31</height>
+      <x>0</x>
+      <y>0</y>
+      <width>581</width>
+      <height>541</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Нажать</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>520</y>
-      <width>47</width>
-      <height>13</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="widget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>20</y>
-      <width>691</width>
-      <height>451</height>
-     </rect>
-    </property>
-    <widget class="QTableWidget" name="ratingWidget">
+    <widget class="QTableWidget" name="categoriesTableWidget">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>30</y>
-       <width>631</width>
-       <height>192</height>
+       <width>561</width>
+       <height>361</height>
       </rect>
      </property>
     </widget>
+    <widget class="QPushButton" name="categoriesDeleteButton">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>400</y>
+       <width>181</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Удалить выделенные</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>0</y>
+       <width>201</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Категории задач</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="createCategoryLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>500</y>
+       <width>271</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="createCategoryButton">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>500</y>
+       <width>131</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Создать </string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>500</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Имя категории:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>470</y>
+       <width>201</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Добавление категории</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="saveCategoriesButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>400</y>
+       <width>191</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Сохранить</string>
+     </property>
+    </widget>
    </widget>
+   <widget class="QWidget" name="tasksWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>9</y>
+      <width>561</width>
+      <height>551</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>10</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Задачи</string>
+     </property>
+    </widget>
+    <widget class="QTableWidget" name="taskTableWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>40</y>
+       <width>561</width>
+       <height>201</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>290</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Добавить задачу:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="taskNameEdit">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>360</y>
+       <width>311</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>360</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Наименование</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>390</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Описание</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>470</y>
+       <width>101</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Срок выполнения</string>
+     </property>
+    </widget>
+    <widget class="QDateTimeEdit" name="taskDateTimeEdit">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>470</y>
+       <width>111</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="taskDescriptionEdit">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>390</y>
+       <width>311</width>
+       <height>71</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="selectCategoryComboBox">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>330</y>
+       <width>311</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>330</y>
+       <width>61</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Категория</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="createTaskButton">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>500</y>
+       <width>111</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Создать задачу</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="markTaskAsDoneButton">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>250</y>
+       <width>161</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Отметить как выполненные</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>checked.png</normaloff>checked.png</iconset>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="deleteTaskButton">
+     <property name="geometry">
+      <rect>
+       <x>384</x>
+       <y>250</y>
+       <width>171</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Удалить выделенные</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>delete.png</normaloff>delete.png</iconset>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="markTaskAsNotDoneButton">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>250</y>
+       <width>181</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Отметить как НЕ  выполненные</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>cancel.png</normaloff>cancel.png</iconset>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="aboutWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>80</y>
+      <width>361</width>
+      <height>221</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>120</y>
+       <width>311</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>  (с) 2022 Лицей Академии Яндекс</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>351</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Персональный менеджер задач</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::PlainText</enum>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="indent">
+      <number>0</number>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="closeAboutButton">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>160</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Закрыть</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>40</y>
+       <width>81</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>logo.png</pixmap>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </widget>
+   <zorder>categoriesWidget</zorder>
+   <zorder>aboutWidget</zorder>
+   <zorder>tasksWidget</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>586</width>
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuRating">
+   <widget class="QMenu" name="menuTask">
     <property name="title">
-     <string>Рейтинг</string>
+     <string>Задачи</string>
     </property>
-    <addaction name="viewMyRatingsAction"/>
-    <addaction name="viewAllRatingsAction"/>
-    <addaction name="addRatingAction"/>
+    <addaction name="viewTasksAction"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Помощь</string>
     </property>
-    <addaction name="viewDocsAction"/>
     <addaction name="viewAboutAction"/>
    </widget>
-   <widget class="QMenu" name="menuUser">
+   <widget class="QMenu" name="menuCategory">
     <property name="title">
-     <string>Пользователь</string>
+     <string>Категории</string>
     </property>
-    <addaction name="loginAction"/>
-    <addaction name="logoutAction"/>
+    <addaction name="viewCategoriesAction"/>
    </widget>
-   <addaction name="menuRating"/>
+   <addaction name="menuTask"/>
+   <addaction name="menuCategory"/>
    <addaction name="menuHelp"/>
-   <addaction name="menuUser"/>
   </widget>
   <widget class="QStatusBar" name="statusbar">
    <property name="enabled">
     <bool>true</bool>
    </property>
   </widget>
-  <action name="viewMyRatingsAction">
+  <action name="viewTasksAction">
    <property name="text">
-    <string>Мои рейтинги</string>
+    <string>Мои задачи</string>
    </property>
   </action>
   <action name="viewAllRatingsAction">
@@ -114,9 +491,9 @@
     <string>Все рейтинги</string>
    </property>
   </action>
-  <action name="addRatingAction">
+  <action name="addTaskAction">
    <property name="text">
-    <string>Добавить рейтинг</string>
+    <string>Добавить задачу</string>
    </property>
   </action>
   <action name="loginAction">
@@ -140,6 +517,16 @@
   <action name="viewAboutAction">
    <property name="text">
     <string>О программе</string>
+   </property>
+  </action>
+  <action name="viewCategoriesAction">
+   <property name="text">
+    <string>Все категории</string>
+   </property>
+  </action>
+  <action name="addCategoryAction">
+   <property name="text">
+    <string>Добавить категорию</string>
    </property>
   </action>
  </widget>
