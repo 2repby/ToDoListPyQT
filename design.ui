@@ -311,7 +311,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Отметить как выполненные</string>
+      <string>Выполнено</string>
      </property>
      <property name="icon">
       <iconset>
@@ -321,9 +321,9 @@
     <widget class="QPushButton" name="deleteTaskButton">
      <property name="geometry">
       <rect>
-       <x>384</x>
-       <y>250</y>
-       <width>171</width>
+       <x>400</x>
+       <y>280</y>
+       <width>151</width>
        <height>23</height>
       </rect>
      </property>
@@ -345,11 +345,28 @@
       </rect>
      </property>
      <property name="text">
-      <string>Отметить как НЕ  выполненные</string>
+      <string>НЕ выполнео</string>
      </property>
      <property name="icon">
       <iconset>
        <normaloff>cancel.png</normaloff>cancel.png</iconset>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="saveTaskButton">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>250</y>
+       <width>151</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Сохранить</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>save.png</normaloff>save.png</iconset>
      </property>
     </widget>
    </widget>
@@ -459,6 +476,7 @@
      <string>Задачи</string>
     </property>
     <addaction name="viewTasksAction"/>
+    <addaction name="exportTasksToFile"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -527,6 +545,11 @@
   <action name="addCategoryAction">
    <property name="text">
     <string>Добавить категорию</string>
+   </property>
+  </action>
+  <action name="exportTasksToFile">
+   <property name="text">
+    <string>Сохранить в файл</string>
    </property>
   </action>
  </widget>

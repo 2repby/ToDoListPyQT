@@ -1,4 +1,4 @@
-import sys, os, PySide2, sqlite3, PyQt5, design
+import sys, os, PySide2, sqlite3, PyQt5, design, csv
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QMessageBox
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from design import Ui_MainWindow
@@ -18,11 +18,13 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         self.aboutWidget.setVisible(True)
         self.closeAboutButton.clicked.connect(self.close_about)
         self.viewCategoriesAction.triggered.connect(self.view_categories)
+        self.exportTasksToFile.triggered.connect(self.export_tasks_to_file)
         self.viewTasksAction.triggered.connect(self.view_tasks)
         self.viewAboutAction.triggered.connect(self.view_about)
         self.categoriesDeleteButton.clicked.connect(self.delete_categories)
         self.createCategoryButton.clicked.connect(self.create_category)
         self.saveCategoriesButton.clicked.connect(self.save_category)
+        self.saveTaskButton.clicked.connect(self.save_tasks)
         self.markTaskAsDoneButton.clicked.connect(self.mark_task_done)
         self.markTaskAsNotDoneButton.clicked.connect(self.mark_task_not_done)
         self.createTaskButton.clicked.connect(self.create_task)
@@ -108,7 +110,7 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         self.categoriesWidget.setVisible(False)
         self.tasksWidget.setVisible(True)
         self.aboutWidget.setVisible(False)
-        query = "SELECT task.id, task.name, task.description, task.deadline, task.done, category.name" \
+        query = "SELECT task.id, task.name, task.description, task.deadline, case when task.done = 1 then 'Да' else 'Нет' end as done, category.name" \
                 " FROM category INNER JOIN task ON task.category_id = category.id"
         res = self.connection.cursor().execute(query).fetchall()
         self.taskTableWidget.setColumnCount(6)
@@ -120,8 +122,8 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         self.taskTableWidget.horizontalHeader().setStretchLastSection(True)
         self.taskTableWidget.setHorizontalHeaderItem(1, QTableWidgetItem('Задача'))
         self.taskTableWidget.setHorizontalHeaderItem(2, QTableWidgetItem('Описание'))
-        self.taskTableWidget.setHorizontalHeaderItem(3, QTableWidgetItem('Срок выполнения'))
-        self.taskTableWidget.setHorizontalHeaderItem(4, QTableWidgetItem('Выполнено/Нет)'))
+        self.taskTableWidget.setHorizontalHeaderItem(3, QTableWidgetItem('Deadline'))
+        self.taskTableWidget.setHorizontalHeaderItem(4, QTableWidgetItem('Выполнено)'))
         self.taskTableWidget.setHorizontalHeaderItem(5, QTableWidgetItem('Категория'))
         for i, row in enumerate(res):
             for j, elem in enumerate(row):
@@ -148,8 +150,9 @@ class MyWidget(QMainWindow, Ui_MainWindow):
     def mark_task_done(self):
         rows = list(set([i.row() for i in self.taskTableWidget.selectedItems()]))
         ids = [self.taskTableWidget.item(i, 0).text() for i in rows]
+        names = [self.taskTableWidget.item(i, 1).text() for i in rows]
         valid = QMessageBox.question(
-            self, '', "Отметить задачи с id " + ",".join(ids) + " как выполненные ?",
+            self, '', "Отметить задачи " + ", ".join(names) + " как выполненные ?",
             QMessageBox.Yes, QMessageBox.No)
         if valid == QMessageBox.Yes:
             cur = self.connection.cursor()
@@ -160,14 +163,25 @@ class MyWidget(QMainWindow, Ui_MainWindow):
     def mark_task_not_done(self):
         rows = list(set([i.row() for i in self.taskTableWidget.selectedItems()]))
         ids = [self.taskTableWidget.item(i, 0).text() for i in rows]
+        names = [self.taskTableWidget.item(i, 1).text() for i in rows]
         valid = QMessageBox.question(
-            self, '', "Отметить задачи с id " + ",".join(ids) + " как НЕ выполненные ?",
+            self, '', "Отметить задачи " + ", ".join(names) + " как НЕ выполненные ?",
             QMessageBox.Yes, QMessageBox.No)
         if valid == QMessageBox.Yes:
             cur = self.connection.cursor()
             cur.execute("UPDATE task SET done=0 WHERE id IN (" + ", ".join('?' * len(ids)) + ")", ids)
             self.connection.commit()
             self.view_tasks()
+
+    def save_tasks(self):
+        for i in range(self.tasksTableWidget.rowCount()):
+            id = self.tasksTableWidget.item(i, 0).text()
+            name = self.tasksTableWidget.item(i, 1).text()
+            desc = self.tasksTableWidget.item(i, 1).text()
+            cur = self.connection.cursor()
+            cur.execute("UPDATE task SET name = ? WHERE id = ?", (name, id))
+            self.connection.commit()
+        self.view_tasks()
 
     def delete_tasks(self):
         rows = list(set([i.row() for i in self.taskTableWidget.selectedItems()]))
@@ -181,6 +195,21 @@ class MyWidget(QMainWindow, Ui_MainWindow):
             cur.execute("DELETE FROM task WHERE id IN (" + ", ".join('?' * len(ids)) + ")", ids)
             self.connection.commit()
             self.view_tasks()
+
+    def export_tasks_to_file(self):
+        with open('tasks.csv', 'w', newline='') as csvfile:
+            query = "SELECT task.id, task.name, task.description, task.deadline, "\
+                    "case when task.done = 1 then 'Да' else 'Нет' end as done, category.name" \
+                    " FROM category INNER JOIN task ON task.category_id = category.id"
+            res = self.connection.cursor().execute(query).fetchall()
+            filewriter = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            filewriter.writerow(['ID', 'Наименование', 'Описание', 'Срок выполнения', 'Выполнено (Да/Нет)', 'Категория'])
+            for i, row in enumerate(res):
+                filewriter.writerow(row)
+
+
+
+
 
 
 if __name__ == '__main__':
