@@ -54,6 +54,10 @@
      <property name="text">
       <string>Удалить выделенные</string>
      </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/delete.png</normaloff>images/delete.png</iconset>
+     </property>
     </widget>
     <widget class="QLabel" name="label">
      <property name="geometry">
@@ -138,6 +142,10 @@
      </property>
      <property name="text">
       <string>Сохранить</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/save.png</normaloff>images/save.png</iconset>
      </property>
     </widget>
    </widget>
@@ -315,7 +323,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>checked.png</normaloff>checked.png</iconset>
+       <normaloff>images/checked.png</normaloff>images/checked.png</iconset>
      </property>
     </widget>
     <widget class="QPushButton" name="deleteTaskButton">
@@ -332,7 +340,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>delete.png</normaloff>delete.png</iconset>
+       <normaloff>images/delete.png</normaloff>images/delete.png</iconset>
      </property>
     </widget>
     <widget class="QPushButton" name="markTaskAsNotDoneButton">
@@ -349,7 +357,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>cancel.png</normaloff>cancel.png</iconset>
+       <normaloff>images/cancel.png</normaloff>images/cancel.png</iconset>
      </property>
     </widget>
     <widget class="QPushButton" name="saveTaskButton">
@@ -366,7 +374,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>save.png</normaloff>save.png</iconset>
+       <normaloff>images/save.png</normaloff>images/save.png</iconset>
      </property>
     </widget>
    </widget>
@@ -451,7 +459,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>logo.png</pixmap>
+      <pixmap>images/logo.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
